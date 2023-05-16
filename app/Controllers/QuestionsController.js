@@ -7,7 +7,18 @@ function _drawQuestions() {
   // console.log("drawing questions", appState.questions);
   // let template = `<p class="fs-1 fw-bold elevation-5">${appState.questions[appState.question].question}</p>`
   // console.log(appState.questions[0].QuestionTemplate);
-  if (appState.question == 9) {
+  if (appState.question == 10) {
+    if (appState.question == 10) {
+      alert(
+        "You got " +
+          appState.correct +
+          " correct and " +
+          appState.incorrect +
+          " incorrect. Please refresh to get new questions"
+      )
+      appState.correct = 0
+      appState.incorrect = 0
+    }
     return
   }
   console.log(appState.questions[appState.question])
@@ -34,29 +45,24 @@ export class QuestionsController {
   }
 
   checkAnswer(answer) {
-    // console.log(answer);
+    
+    console.log(appState.question);
+    console.log(answer);
     // console.log(appState.questions[appState.question].correct_answer);
     if (appState.questions[appState.question].correct_answer == answer) {
       Pop.toast("Correct!")
 
       appState.correct++
-      appState.emit("questions")
+      
     } else {
       Pop.toast("wrong answer")
 
       appState.incorrect++
-      appState.emit("questions")
     }
-    if (appState.question == 9) {
-      alert(
-        "You got " +
-          appState.correct +
-          " correct and " +
-          appState.incorrect +
-          " incorrect. Please refresh to get new questions"
-      )
-    }
-    console.log(appState.question);
+    
     appState.question++
+    appState.emit("questions")
+    
+    
   }
 }
